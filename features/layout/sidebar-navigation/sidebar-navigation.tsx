@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { Routes } from "@config/routes";
 import classNames from "classnames";
+import { BrandLogo } from "../brand-logo";
 import { NavigationContext } from "./navigation-context";
 import { MenuItemButton } from "./menu-item-button";
 import { MenuItemLink } from "./menu-item-link";
@@ -34,15 +35,10 @@ export function SidebarNavigation() {
         )}
       >
         <header className={styles.header}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={
-              isSidebarCollapsed
-                ? "/icons/logo-small.svg"
-                : "/icons/logo-large.svg"
-            }
-            alt="logo"
-            className={styles.logo}
+          <BrandLogo
+            showWordmark={!isSidebarCollapsed}
+            compact={isSidebarCollapsed}
+            className={styles.logoSlot}
           />
           <Button
             onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}

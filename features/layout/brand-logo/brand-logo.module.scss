@@ -1,0 +1,46 @@
+@use "@styles/space";
+
+.wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: space.$s3;
+  text-decoration: none;
+  min-width: 0;
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+}
+
+.mark {
+  flex-shrink: 0;
+  width: 2.0625rem;
+  height: 2.0625rem;
+  filter: drop-shadow(0 2px 8px rgb(139 92 246 / 35%));
+}
+
+.compact .mark {
+  width: 1.4375rem;
+  height: 1.4375rem;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.err {
+  color: var(--text-primary);
+}
+
+.sense {
+  color: #ddd6fe;
+}
