@@ -1,0 +1,32 @@
+@use "@styles/color";
+@use "@styles/space";
+@use "@styles/font";
+
+.code {
+  background: color.$gray-900;
+  color: color.$gray-100;
+  padding: space.$s3 space.$s4;
+  border-radius: 6px;
+  margin: space.$s3 0;
+  overflow-x: auto;
+  font:
+    400 0.8125rem/1.5 ui-monospace,
+    "SF Mono",
+    Menlo,
+    Consolas,
+    monospace;
+  white-space: pre;
+}
+
+.inlineCode {
+  background: color.$gray-100;
+  color: color.$primary-700;
+  padding: 0.05rem 0.35rem;
+  border-radius: 4px;
+  font:
+    500 0.85em/1 ui-monospace,
+    "SF Mono",
+    Menlo,
+    Consolas,
+    monospace;
+}

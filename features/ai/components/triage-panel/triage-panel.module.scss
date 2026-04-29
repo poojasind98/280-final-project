@@ -1,0 +1,207 @@
+@use "@styles/color";
+@use "@styles/space";
+@use "@styles/font";
+
+.panel {
+  background: white;
+  border: 1px solid color.$primary-200;
+  border-radius: space.$s2;
+  padding: space.$s6;
+  box-shadow:
+    0 4px 8px -2px rgb(16 24 40 / 6%),
+    0 2px 4px -2px rgb(16 24 40 / 4%);
+  margin-bottom: space.$s6;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: space.$s4;
+  margin-bottom: space.$s3;
+}
+
+.title {
+  font: font.$text-md-semibold;
+  color: color.$primary-700;
+  margin: 0 0 space.$s1;
+  display: flex;
+  align-items: center;
+  gap: space.$s2;
+
+  &::before {
+    content: "✦";
+    color: color.$primary-500;
+    font-size: 1rem;
+  }
+}
+
+.subtitle {
+  font: font.$text-sm-regular;
+  color: color.$gray-500;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  gap: space.$s2;
+  flex-shrink: 0;
+}
+
+.actionButton {
+  height: 32px;
+  padding: 0 space.$s3;
+  background: white;
+  border: 1px solid color.$gray-300;
+  border-radius: 6px;
+  color: color.$gray-700;
+  font: font.$text-sm-medium;
+  cursor: pointer;
+
+  &:hover {
+    background: color.$gray-50;
+  }
+
+  &:focus-visible {
+    outline: 2px solid color.$primary-500;
+    outline-offset: 2px;
+  }
+}
+
+.providerBadge {
+  display: inline-block;
+  padding: space.$s1 space.$s3;
+  margin-bottom: space.$s3;
+  background: color.$warning-50;
+  border: 1px solid color.$warning-200;
+  border-radius: 999px;
+  color: color.$warning-700;
+  font: font.$text-xs-medium;
+}
+
+.body {
+  color: color.$gray-700;
+  font: font.$text-sm-regular;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 6rem;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  background: color.$primary-500;
+  vertical-align: middle;
+  animation: blink 1s steps(2, start) infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+.error {
+  margin-top: space.$s3;
+  padding: space.$s3 space.$s4;
+  background: color.$error-50;
+  border: 1px solid color.$error-200;
+  border-radius: 6px;
+  color: color.$error-700;
+  font: font.$text-sm-regular;
+}
+
+.empty {
+  color: color.$gray-500;
+  font: font.$text-sm-regular;
+  margin: space.$s4 0 0;
+}
+
+.citations {
+  margin-top: space.$s5;
+  padding-top: space.$s4;
+  border-top: 1px dashed color.$gray-200;
+}
+
+.citationsTitle {
+  font: font.$text-xs-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: color.$gray-500;
+  margin: 0 0 space.$s3;
+}
+
+.citationList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: space.$s2;
+}
+
+.citation {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: space.$s3;
+  align-items: baseline;
+  padding: space.$s2 space.$s3;
+  background: color.$gray-50;
+  border-radius: 6px;
+  font: font.$text-xs-regular;
+}
+
+.citationScore {
+  font: font.$text-xs-semibold;
+  color: color.$primary-700;
+  min-width: 2.75rem;
+}
+
+.citationName {
+  font: font.$text-xs-semibold;
+  color: color.$gray-900;
+}
+
+.citationMessage {
+  color: color.$gray-600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: space.$s2;
+}
+
+.skeletonLine {
+  display: block;
+  height: 12px;
+  background: linear-gradient(
+    90deg,
+    color.$gray-100 0%,
+    color.$gray-200 50%,
+    color.$gray-100 100%
+  );
+  background-size: 200% 100%;
+  border-radius: 4px;
+  animation: shimmer 1.4s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}

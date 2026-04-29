@@ -1,0 +1,162 @@
+@use "@styles/color";
+@use "@styles/space";
+@use "@styles/font";
+
+.backLink {
+  display: inline-block;
+  margin-bottom: space.$s4;
+  color: color.$primary-700;
+  font: font.$text-sm-medium;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid color.$primary-500;
+    outline-offset: 2px;
+  }
+}
+
+.state {
+  padding: space.$s8 space.$s6;
+  background: white;
+  border: 1px solid color.$gray-200;
+  border-radius: space.$s2;
+  color: color.$gray-600;
+  font: font.$text-sm-regular;
+  text-align: center;
+}
+
+.error {
+  padding: space.$s4;
+  background: color.$error-50;
+  border: 1px solid color.$error-200;
+  border-radius: space.$s2;
+  color: color.$error-700;
+  font: font.$text-sm-regular;
+}
+
+.summary {
+  background: white;
+  border: 1px solid color.$gray-200;
+  border-radius: space.$s2;
+  padding: space.$s6;
+  box-shadow:
+    0 4px 8px -2px rgb(16 24 40 / 6%),
+    0 2px 4px -2px rgb(16 24 40 / 4%);
+  margin-bottom: space.$s6;
+}
+
+.summaryHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: space.$s4;
+  margin-bottom: space.$s5;
+}
+
+.errorName {
+  font: font.$display-sm-semibold;
+  color: color.$gray-900;
+  margin: 0 0 space.$s2;
+  word-break: break-word;
+}
+
+.errorMessage {
+  font: font.$text-md-regular;
+  color: color.$gray-600;
+  margin: 0;
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: space.$s4;
+  margin: 0 0 space.$s5;
+
+  div {
+    background: color.$gray-50;
+    padding: space.$s3 space.$s4;
+    border-radius: 6px;
+  }
+
+  dt {
+    font: font.$text-xs-medium;
+    color: color.$gray-500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: space.$s1;
+  }
+
+  dd {
+    margin: 0;
+    font: font.$text-sm-medium;
+    color: color.$gray-900;
+    word-break: break-all;
+
+    code {
+      font:
+        500 0.8em/1.4 ui-monospace,
+        "SF Mono",
+        Menlo,
+        Consolas,
+        monospace;
+    }
+  }
+}
+
+.copilotButton {
+  display: inline-flex;
+  align-items: center;
+  gap: space.$s2;
+  height: 40px;
+  padding: 0 space.$s5;
+  background: color.$primary-600;
+  color: white;
+  border: 1px solid color.$primary-600;
+  border-radius: 8px;
+  font: font.$text-sm-semibold;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgb(16 24 40 / 8%);
+
+  &:hover {
+    background: color.$primary-700;
+  }
+
+  &:focus-visible {
+    outline: 2px solid color.$primary-500;
+    outline-offset: 2px;
+  }
+}
+
+.stackSection {
+  background: white;
+  border: 1px solid color.$gray-200;
+  border-radius: space.$s2;
+  padding: space.$s6;
+  margin-bottom: space.$s6;
+}
+
+.stackTitle {
+  font: font.$text-md-semibold;
+  color: color.$gray-900;
+  margin: 0 0 space.$s3;
+}
+
+.stack {
+  background: color.$gray-900;
+  color: color.$gray-100;
+  padding: space.$s4;
+  border-radius: 6px;
+  overflow-x: auto;
+  font:
+    400 0.8125rem/1.55 ui-monospace,
+    "SF Mono",
+    Menlo,
+    Consolas,
+    monospace;
+  margin: 0;
+  max-height: 24rem;
+}
