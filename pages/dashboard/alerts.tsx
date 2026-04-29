@@ -1,21 +1,15 @@
 import { PageContainer } from "@features/layout";
-import { PlaceholderPanel } from "@features/ui";
-import { Routes } from "@config/routes";
+import { AlertList } from "@features/alerts";
 import type { NextPage } from "next";
 
 const AlertsPage: NextPage = () => {
   return (
     <PageContainer
       title="Alerts"
-      metaDescription="ErrSense alerting — notifications for thresholds and regressions (roadmap)."
-      info="Configure notifications when error volume spikes or specific signatures regress."
+      metaDescription="ErrSense alert rules — channels, firing status, and notification volume for error spikes and regressions."
+      info="Monitor firing rules, notification channels, and recent deliveries tied to your projects."
     >
-      <PlaceholderPanel
-        eyebrow="Roadmap"
-        title="Alert rules & notification channels"
-        description="Production-grade alerting ties observability to action: Slack, email, PagerDuty-style escalation, and anomaly detection on event counts. This surface is intentionally deferred so the core triage and Copilot flows stay polished — it’s the natural next vertical slice after Issues stabilizes."
-        primaryAction={{ label: "View Issues", href: Routes.issues }}
-      />
+      <AlertList />
     </PageContainer>
   );
 };
