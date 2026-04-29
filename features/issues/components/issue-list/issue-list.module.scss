@@ -1,15 +1,18 @@
-@use "@styles/color";
 @use "@styles/space";
 @use "@styles/font";
 
 .container {
-  background: white;
-  border: 1px solid color.$gray-200;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(160%);
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--glass-border);
   box-sizing: border-box;
   box-shadow:
-    0 4px 8px -2px rgb(16 24 40 / 10%),
-    0 2px 4px -2px rgb(16 24 40 / 6%);
-  border-radius: space.$s2;
+    0 18px 40px -16px rgb(0 0 0 / 50%),
+    inset 0 1px 0 rgb(255 255 255 / 6%);
+  border-radius: var(--radius-lg);
   overflow: hidden;
 }
 
@@ -19,14 +22,16 @@
 }
 
 .headerRow {
-  border-bottom: 1px solid color.$gray-200;
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .headerCell {
-  padding: space.$s3 space.$s6;
+  padding: space.$s4 space.$s6;
   text-align: left;
-  color: color.$gray-500;
+  color: var(--text-muted);
   font: font.$text-xs-medium;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .paginationContainer {
@@ -34,43 +39,71 @@
   align-items: center;
   justify-content: space-between;
   padding: space.$s4 space.$s6;
-  border-top: 1px solid color.$gray-200;
+  border-top: 1px solid var(--glass-border);
+  background: rgb(255 255 255 / 2%);
 }
 
 .paginationButton {
   height: 38px;
-  padding: space.$s0 space.$s4;
-  background: white;
-  border: 1px solid color.$gray-300;
-  box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
-  border-radius: 6px;
+  padding: 0 space.$s4;
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border-strong);
+  color: var(--text-primary);
+  border-radius: 8px;
+  font: font.$text-sm-medium;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 }
 
 .paginationButton:not(:first-of-type) {
   margin-left: space.$s3;
 }
 
+.paginationButton:not(:disabled):hover {
+  background: rgb(255 255 255 / 12%);
+  border-color: rgb(255 255 255 / 22%);
+  transform: translateY(-1px);
+}
+
 .pageInfo {
-  color: color.$gray-300;
+  color: var(--text-muted);
   font: font.$text-sm-regular;
 }
 
 .pageNumber {
   font: font.$text-sm-medium;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum";
 }
 
 .filterStatus {
-  padding: space.$s2 space.$s6;
-  background: color.$primary-25;
-  border-bottom: 1px solid color.$primary-100;
-  color: color.$primary-700;
+  padding: space.$s3 space.$s6;
+  background: rgb(139 92 246 / 8%);
+  border-bottom: 1px solid rgb(139 92 246 / 18%);
+  color: var(--accent);
   font: font.$text-xs-medium;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
 }
 
 .emptyState {
-  padding: space.$s8 space.$s6;
+  padding: space.$s12 space.$s6;
   text-align: center;
-  color: color.$gray-500;
+  color: var(--text-muted);
   font: font.$text-sm-regular;
-  border-top: 1px solid color.$gray-200;
+  border-top: 1px solid var(--glass-border);
 }

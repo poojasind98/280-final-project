@@ -1,53 +1,76 @@
-@use "@styles/color";
 @use "@styles/font";
 @use "@styles/space";
 
 .container {
   width: fit-content;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  border-radius: space.$s4;
+  gap: 6px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  letter-spacing: 0.02em;
+  font-feature-settings: "tnum";
+
+  /* Tiny status dot drawn as a pseudo-element so every badge gets a
+   * consistent visual cue without DOM changes. */
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentcolor;
+    box-shadow: 0 0 8px currentcolor;
+  }
 
   &.sm {
-    padding: space.$s0 space.$s2;
-    height: 1.375rem;
+    padding: 0 space.$s2 0 space.$s3;
+    height: 1.5rem;
     font: font.$text-xs-medium;
   }
 
   &.md {
-    padding: 0 0.625rem;
-    height: 1.5rem;
+    padding: 0 0.75rem 0 0.875rem;
+    height: 1.625rem;
     font: font.$text-sm-medium;
   }
 
   &.lg {
-    padding: space.$s0 space.$s3;
-    height: 1.75rem;
+    padding: 0 space.$s3 0 space.$s4;
+    height: 1.875rem;
     font: font.$text-sm-medium;
   }
 
   &.gray {
-    background: color.$gray-100;
-    color: color.$gray-700;
+    background: rgb(255 255 255 / 6%);
+    color: var(--text-secondary);
+    border-color: rgb(255 255 255 / 10%);
   }
 
   &.primary {
-    background: color.$primary-50;
-    color: color.$primary-700;
+    background: rgb(139 92 246 / 14%);
+    color: var(--accent);
+    border-color: rgb(139 92 246 / 30%);
   }
 
   &.error {
-    background: color.$error-50;
-    color: color.$error-700;
+    background: rgb(251 113 133 / 12%);
+    color: var(--status-error);
+    border-color: rgb(251 113 133 / 30%);
+    box-shadow:
+      0 0 0 0 rgb(251 113 133 / 0%),
+      inset 0 0 12px rgb(251 113 133 / 8%);
   }
 
   &.warning {
-    background: color.$warning-50;
-    color: color.$warning-700;
+    background: rgb(251 191 36 / 12%);
+    color: var(--status-warning);
+    border-color: rgb(251 191 36 / 30%);
   }
 
   &.success {
-    background: color.$success-50;
-    color: color.$success-700;
+    background: rgb(52 211 153 / 12%);
+    color: var(--status-success);
+    border-color: rgb(52 211 153 / 30%);
   }
 }

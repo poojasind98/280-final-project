@@ -1,10 +1,168 @@
 @use "color";
 
+/**
+ * Theme tokens — exposed as CSS custom properties so component styles can
+ * compose them and so we can later add a `[data-theme="light"]` override
+ * without re-writing every module file.
+ */
+:root {
+  /* Surfaces */
+  --bg-base: #060914;
+  --bg-elevated: rgb(20 26 46 / 60%);
+  --bg-elevated-strong: rgb(20 26 46 / 88%);
+  --glass-bg: rgb(255 255 255 / 4%);
+  --glass-bg-strong: rgb(255 255 255 / 8%);
+  --glass-border: rgb(255 255 255 / 8%);
+  --glass-border-strong: rgb(255 255 255 / 14%);
+
+  /* Text */
+  --text-primary: #f5f7fa;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-on-accent: #fff;
+
+  /* Accents — AI / brand */
+  --accent: #a78bfa;
+  --accent-strong: #8b5cf6;
+  --accent-soft: rgb(167 139 250 / 14%);
+  --accent-cyan: #22d3ee;
+  --accent-magenta: #ec4899;
+
+  /* Status */
+  --status-info: #60a5fa;
+  --status-success: #34d399;
+  --status-warning: #fbbf24;
+  --status-error: #fb7185;
+
+  /* Effects */
+  --glow-accent: 0 0 24px rgb(139 92 246 / 35%);
+  --glow-error: 0 0 24px rgb(251 113 133 / 35%);
+  --glow-cyan: 0 0 24px rgb(34 211 238 / 30%);
+
+  /* Type stacks */
+  --font-display: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", menlo, consolas,
+    monospace;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+}
+
+html,
 body {
-  font-family: Inter, sans-serif;
-  color: color.$gray-900;
+  background: var(--bg-base);
+  color: var(--text-primary);
+}
+
+body {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Aurora gradient mesh — three drifting orbs over the dark base. The whole
+ * thing is `position: fixed` so it stays put while the page scrolls, and
+ * `pointer-events: none` so it never intercepts clicks. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -20vmax;
+  background: radial-gradient(
+      40vmax 40vmax at 18% 22%,
+      rgb(139 92 246 / 32%),
+      transparent 60%
+    ),
+    radial-gradient(
+      36vmax 36vmax at 82% 14%,
+      rgb(34 211 238 / 22%),
+      transparent 60%
+    ),
+    radial-gradient(
+      48vmax 48vmax at 60% 92%,
+      rgb(236 72 153 / 18%),
+      transparent 60%
+    );
+  filter: blur(40px) saturate(140%);
+  z-index: -2;
+  animation: aurora-drift 28s ease-in-out infinite alternate;
+  pointer-events: none;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+/* A subtle film-grain layer keeps the aurora from looking like a stock
+ * background and gives the dark base a tactile, lived-in quality. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgb(255 255 255 / 4%) 1px,
+    transparent 0
+  );
+  background-size: 3px 3px;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.6;
+  mix-blend-mode: overlay;
+}
+
+@keyframes aurora-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(2vmax, -3vmax, 0) scale(1.04);
+  }
+
+  100% {
+    transform: translate3d(-2vmax, 1vmax, 0) scale(1.02);
+  }
 }
 
 a {
-  color: color.$primary-700;
+  color: var(--accent);
+  transition: color 160ms ease;
+
+  &:hover {
+    color: var(--accent-cyan);
+  }
+}
+
+/* Custom scrollbars — a small but high-impact touch on dark themes. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 12%) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgb(255 255 255 / 10%);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgb(255 255 255 / 18%);
+  background-clip: padding-box;
+}
+
+/* Selection styling */
+::selection {
+  background: rgb(139 92 246 / 40%);
+  color: #fff;
 }

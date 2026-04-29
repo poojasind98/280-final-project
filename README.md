@@ -15,12 +15,12 @@ insight.
    verify exactly what context the model used.
 2. **Conversational Copilot Drawer** — A side-drawer chat scoped to the
    current issue. Issue context is auto-attached server-side, so users can ask
-   things like *"write a test that reproduces this"*, *"draft a Slack update"*,
-   or *"explain frame 3"* without manually re-explaining the bug. Streaming
+   things like _"write a test that reproduces this"_, _"draft a Slack update"_,
+   or _"explain frame 3"_ without manually re-explaining the bug. Streaming
    responses, stop / regenerate, suggestion chips, full keyboard support,
    focus trap, and ARIA dialog semantics.
-3. **Natural-language filter bar** — Type *"react errors with more than 100
-   events"* into the search and the issue list filters itself. The AI's parse
+3. **Natural-language filter bar** — Type _"react errors with more than 100
+   events"_ into the search and the issue list filters itself. The AI's parse
    is rendered as editable, removable chips with a transparency rationale —
    the AI never silently mutates app state.
 

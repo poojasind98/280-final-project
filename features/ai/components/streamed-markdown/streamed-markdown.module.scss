@@ -1,32 +1,36 @@
-@use "@styles/color";
 @use "@styles/space";
-@use "@styles/font";
 
 .code {
-  background: color.$gray-900;
-  color: color.$gray-100;
-  padding: space.$s3 space.$s4;
-  border-radius: 6px;
+  background: rgb(6 9 20 / 70%);
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border-strong);
+  padding: space.$s4;
+  border-radius: 10px;
   margin: space.$s3 0;
   overflow-x: auto;
-  font:
-    400 0.8125rem/1.5 ui-monospace,
-    "SF Mono",
-    Menlo,
-    Consolas,
-    monospace;
+  font: 400 0.8125rem/1.6 var(--font-mono);
   white-space: pre;
+  position: relative;
+
+  /* Subtle gutter accent */
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent-cyan), var(--accent));
+    border-radius: 0 3px 3px 0;
+    opacity: 0.7;
+  }
 }
 
 .inlineCode {
-  background: color.$gray-100;
-  color: color.$primary-700;
-  padding: 0.05rem 0.35rem;
+  background: rgb(139 92 246 / 14%);
+  color: var(--accent);
+  padding: 2px 6px;
   border-radius: 4px;
-  font:
-    500 0.85em/1 ui-monospace,
-    "SF Mono",
-    Menlo,
-    Consolas,
-    monospace;
+  font: 500 0.85em / 1 var(--font-mono);
+  border: 1px solid rgb(139 92 246 / 25%);
 }

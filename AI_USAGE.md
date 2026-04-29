@@ -34,7 +34,7 @@ The following pieces were generated or substantially co-written with Cursor:
 These choices were made by the developer, not the AI, and reflect the
 project's product and engineering judgement:
 
-- **Product framing** — a *Copilot for production-error triage* solving a
+- **Product framing** — a _Copilot for production-error triage_ solving a
   concrete user problem (on-call engineers spending too long parsing stack
   traces and identifying duplicates). This was selected over a generic chatbot
   precisely because it surfaces grounded, citable context.
@@ -51,7 +51,7 @@ project's product and engineering judgement:
   scoring function (`features/ai-server/similarity.ts`) was hand-tuned
   (stopwords, IDF smoothing, `topK` cutoff).
 - **Citations as a first-class UI element** — the triage panel always renders
-  *which* past issues were used as context, with their similarity scores.
+  _which_ past issues were used as context, with their similarity scores.
   This is the "thoughtful integration" the rubric asks for: the model's
   grounding is visible to the user, who can verify it.
 - **Editable parsed filters** — the NL filter bar shows the parsed filter as

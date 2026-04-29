@@ -1,113 +1,140 @@
-@use "@styles/color";
 @use "@styles/space";
 @use "@styles/font";
 
 .bar {
   display: flex;
   flex-direction: column;
-  gap: space.$s2;
-  margin-bottom: space.$s4;
+  gap: space.$s3;
+  margin-bottom: space.$s5;
 }
 
 .form {
   display: flex;
   align-items: center;
   gap: space.$s2;
-  background: white;
-  border: 1px solid color.$gray-300;
-  border-radius: 8px;
-  padding: space.$s2;
-  box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: 14px;
+  padding: 6px;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
 
   &:focus-within {
-    border-color: color.$primary-500;
-    box-shadow: 0 0 0 3px color.$primary-100;
+    border-color: var(--accent);
+    box-shadow:
+      0 0 0 3px rgb(139 92 246 / 18%),
+      var(--glow-accent);
   }
 }
 
 .icon {
-  color: color.$primary-500;
-  padding: 0 space.$s2;
-  font-size: 1rem;
+  padding: 0 space.$s2 0 space.$s3;
+  font-size: 1.125rem;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent));
+  background-clip: text;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 6px rgb(139 92 246 / 60%));
 }
 
 .input {
   flex: 1;
   border: none;
   outline: none;
-  font: font.$text-sm-regular;
-  color: color.$gray-900;
+  font: font.$text-md-regular;
+  color: var(--text-primary);
   background: transparent;
   min-width: 0;
+  padding: 6px 0;
 
   &::placeholder {
-    color: color.$gray-400;
+    color: var(--text-muted);
   }
 }
 
 .button {
-  height: 36px;
+  height: 38px;
   padding: 0 space.$s4;
-  background: color.$primary-600;
+  background: linear-gradient(135deg, var(--accent-strong), var(--accent-cyan));
   color: white;
-  border: 1px solid color.$primary-600;
-  border-radius: 6px;
-  font: font.$text-sm-medium;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font: font.$text-sm-semibold;
   cursor: pointer;
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+  box-shadow: 0 8px 20px -8px rgb(139 92 246 / 60%);
 
   &:disabled {
-    background: color.$gray-300;
-    border-color: color.$gray-300;
+    background: rgb(255 255 255 / 8%);
+    color: var(--text-muted);
     cursor: not-allowed;
+    box-shadow: none;
   }
 
   &:focus-visible {
-    outline: 2px solid color.$primary-500;
+    outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
 
   &:hover:not(:disabled) {
-    background: color.$primary-700;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px -10px rgb(139 92 246 / 80%);
   }
 }
 
 .clearButton {
-  height: 36px;
+  height: 38px;
   padding: 0 space.$s3;
-  background: white;
-  border: 1px solid color.$gray-300;
-  border-radius: 6px;
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: 10px;
   font: font.$text-sm-medium;
-  color: color.$gray-700;
+  color: var(--text-secondary);
   cursor: pointer;
   flex-shrink: 0;
 
   &:hover {
-    background: color.$gray-50;
+    background: rgb(255 255 255 / 12%);
+    color: var(--text-primary);
   }
 }
 
 .error {
   padding: space.$s2 space.$s3;
-  background: color.$error-50;
-  border: 1px solid color.$error-200;
-  border-radius: 6px;
-  color: color.$error-700;
+  background: rgb(251 113 133 / 12%);
+  border: 1px solid rgb(251 113 133 / 30%);
+  border-radius: 8px;
+  color: var(--status-error);
   font: font.$text-sm-regular;
 }
 
 .rationale {
   margin: 0;
-  padding: space.$s2 space.$s3;
-  background: color.$primary-25;
-  border: 1px dashed color.$primary-200;
-  border-radius: 6px;
-  color: color.$primary-800;
+  padding: space.$s3 space.$s4;
+  background: rgb(34 211 238 / 6%);
+  border: 1px dashed rgb(34 211 238 / 28%);
+  border-radius: 10px;
+  color: var(--accent-cyan);
   font: font.$text-xs-regular;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
 
   strong {
-    font: font.$text-xs-semibold;
+    font-weight: 700;
+    color: var(--accent);
   }
 }
 
@@ -124,12 +151,13 @@
   display: inline-flex;
   align-items: center;
   gap: space.$s2;
-  padding: space.$s1 space.$s2 space.$s1 space.$s3;
-  background: color.$primary-50;
-  border: 1px solid color.$primary-200;
+  padding: 4px space.$s2 4px space.$s3;
+  background: rgb(139 92 246 / 14%);
+  border: 1px solid rgb(139 92 246 / 30%);
   border-radius: 999px;
   font: font.$text-xs-regular;
-  color: color.$primary-800;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
 }
 
 .chipLabel {
@@ -141,21 +169,22 @@
   height: 18px;
   border-radius: 50%;
   border: none;
-  background: color.$primary-100;
-  color: color.$primary-700;
+  background: rgb(255 255 255 / 8%);
+  color: var(--text-secondary);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 10px;
 
-  &:hover {
-    background: color.$primary-200;
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 
-  &:focus-visible {
-    outline: 2px solid color.$primary-500;
-    outline-offset: 2px;
+  &:hover {
+    background: rgb(255 255 255 / 16%);
+    color: var(--text-primary);
   }
 }
 
@@ -167,27 +196,37 @@
 }
 
 .examplesLabel {
-  font: font.$text-xs-medium;
-  color: color.$gray-500;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
 }
 
 .exampleChip {
-  padding: space.$s1 space.$s3;
-  background: color.$gray-50;
-  border: 1px dashed color.$gray-300;
+  padding: 4px space.$s3;
+  background: var(--glass-bg-strong);
+  border: 1px dashed var(--glass-border-strong);
   border-radius: 999px;
   font: font.$text-xs-regular;
-  color: color.$gray-600;
+  color: var(--text-secondary);
   cursor: pointer;
-
-  &:hover {
-    background: color.$gray-100;
-    color: color.$gray-800;
-  }
+  font-family: var(--font-mono);
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
 
   &:focus-visible {
-    outline: 2px solid color.$primary-500;
+    outline: 2px solid var(--accent);
     outline-offset: 2px;
+  }
+
+  &:hover {
+    background: rgb(139 92 246 / 14%);
+    color: var(--text-primary);
+    border-color: rgb(139 92 246 / 40%);
   }
 }
 

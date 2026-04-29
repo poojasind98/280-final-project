@@ -6,7 +6,33 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
+  background: rgb(6 9 20 / 60%);
+  backdrop-filter: blur(16px) saturate(180%);
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid var(--glass-border);
+  position: relative;
+  z-index: 10;
+
+  a {
+    color: var(--text-primary);
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border-strong);
+    padding: 0.5rem 1.25rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    transition:
+      background 160ms ease,
+      border-color 160ms ease;
+
+    &:hover {
+      background: rgb(139 92 246 / 14%);
+      border-color: rgb(139 92 246 / 40%);
+      color: var(--accent);
+    }
+  }
 }
 
 .contactButton {
@@ -14,13 +40,26 @@
   bottom: 2.5rem;
   right: 2.5rem;
   padding: 1rem;
-  background: #7f56d9;
+  background: linear-gradient(135deg, var(--accent-strong), var(--accent-cyan));
   border-radius: 50%;
-  box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
   border: none;
   cursor: pointer;
+  box-shadow:
+    0 12px 32px -8px rgb(139 92 246 / 60%),
+    inset 0 1px 0 rgb(255 255 255 / 20%);
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 220ms ease;
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
 
   &:hover {
-    background: #6941c6;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow:
+      0 20px 48px -12px rgb(139 92 246 / 80%),
+      inset 0 1px 0 rgb(255 255 255 / 25%);
   }
 }
