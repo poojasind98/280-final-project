@@ -6,6 +6,7 @@ const Home: NextPage = () => {
   return (
     <PageContainer
       title="Projects"
+      metaDescription="ErrSense projects dashboard — monitor error volume and drill into issues per codebase."
       info="Overview of your projects sorted by alert level."
     >
       <ProjectList />

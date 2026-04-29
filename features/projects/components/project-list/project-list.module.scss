@@ -1,4 +1,5 @@
 @use "@styles/breakpoint";
+@use "@styles/font";
 @use "@styles/space";
 
 .list {
@@ -14,4 +15,56 @@
   @media (min-width: breakpoint.$desktop) {
     grid-template-columns: repeat(auto-fit, 400px);
   }
+}
+
+.errorBox {
+  padding: space.$s5 space.$s6;
+  background: rgb(251 113 133 / 10%);
+  border: 1px solid rgb(251 113 133 / 28%);
+  border-radius: var(--radius-md);
+  color: var(--status-error);
+  font: font.$text-md-regular;
+  line-height: 1.5;
+}
+
+.errorBox strong {
+  font-weight: 600;
+}
+
+.skeletonGrid {
+  composes: list;
+}
+
+.skeletonCard {
+  height: 240px;
+  padding: space.$s6;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: space.$s4;
+}
+
+.skeletonRow {
+  display: flex;
+  align-items: center;
+  gap: space.$s3;
+}
+
+.skeletonIcon {
+  flex-shrink: 0;
+}
+
+.skeletonGrow {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: space.$s2;
+}
+
+.skeletonStats {
+  display: flex;
+  gap: space.$s6;
+  margin-top: auto;
 }

@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import capitalize from "lodash/capitalize";
-import { Badge, BadgeColor, BadgeSize } from "@features/ui";
+import { Badge, BadgeColor, BadgeSize, SkeletonPulse } from "@features/ui";
 import { PageContainer } from "@features/layout";
 import { CopilotDrawer, TriagePanel } from "@features/ai";
 import { useGetIssue } from "@features/issues";
@@ -16,6 +16,65 @@ const levelColors = {
   [IssueLevel.warning]: BadgeColor.warning,
   [IssueLevel.error]: BadgeColor.error,
 };
+
+function IssueDetailSkeleton() {
+  return (
+    <div
+      className={styles.loadingShell}
+      aria-busy="true"
+      aria-live="polite"
+      aria-label="Loading issue details"
+    >
+      <div className={styles.loadingCard}>
+        <div className={styles.loadingHeader}>
+          <div style={{ flex: 1 }}>
+            <SkeletonPulse height="2rem" width="55%" rounded="sm" />
+            <SkeletonPulse
+              height="1rem"
+              width="85%"
+              rounded="sm"
+              className={styles.loadingGapTop}
+            />
+          </div>
+          <SkeletonPulse height="1.625rem" width="5rem" rounded="full" />
+        </div>
+        <div className={styles.loadingMeta}>
+          <SkeletonPulse height="3.25rem" width="100%" rounded="md" />
+          <SkeletonPulse height="3.25rem" width="100%" rounded="md" />
+          <SkeletonPulse height="3.25rem" width="100%" rounded="md" />
+        </div>
+        <SkeletonPulse
+          height="44px"
+          width="180px"
+          rounded="md"
+          className={styles.loadingGapTop}
+        />
+      </div>
+      <div className={styles.loadingCard}>
+        <SkeletonPulse height="1.25rem" width="40%" rounded="sm" />
+        <SkeletonPulse
+          height="0.875rem"
+          width="90%"
+          rounded="sm"
+          className={styles.loadingGapTop}
+        />
+        <div className={styles.loadingStackLines}>
+          <SkeletonPulse height="0.75rem" width="100%" rounded="sm" />
+          <SkeletonPulse height="0.75rem" width="92%" rounded="sm" />
+          <SkeletonPulse height="0.75rem" width="78%" rounded="sm" />
+        </div>
+      </div>
+      <div className={styles.loadingCard}>
+        <SkeletonPulse height="0.75rem" width="28%" rounded="sm" />
+        <div className={styles.loadingStackLines}>
+          {Array.from({ length: 6 }).map((_, i) => (
+            <SkeletonPulse key={i} height="0.75rem" width="100%" rounded="sm" />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const IssueDetailPage: NextPage = () => {
   const router = useRouter();
@@ -30,14 +89,13 @@ const IssueDetailPage: NextPage = () => {
     <PageContainer
       title="Issue Detail"
       info="Inspect an individual error and ask the Copilot for help."
+      metaDescription="ErrSense issue detail — AI triage, stack trace, and conversational Copilot for production errors."
     >
       <Link href="/dashboard/issues" className={styles.backLink}>
         ← Back to issues
       </Link>
 
-      {issueQuery.isLoading && (
-        <div className={styles.state}>Loading issue…</div>
-      )}
+      {issueQuery.isLoading && <IssueDetailSkeleton />}
 
       {issueQuery.isError && (
         <div className={styles.error} role="alert">

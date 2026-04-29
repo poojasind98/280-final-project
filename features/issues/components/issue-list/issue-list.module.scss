@@ -72,6 +72,12 @@
   margin-left: space.$s3;
 }
 
+.skeletonPaginationInner {
+  display: flex;
+  align-items: center;
+  gap: space.$s3;
+}
+
 .paginationButton:not(:disabled):hover {
   background: rgb(255 255 255 / 12%);
   border-color: rgb(255 255 255 / 22%);
@@ -106,4 +112,38 @@
   color: var(--text-muted);
   font: font.$text-sm-regular;
   border-top: 1px solid var(--glass-border);
+}
+
+.errorBox {
+  padding: space.$s5 space.$s6;
+  background: rgb(251 113 133 / 10%);
+  border: 1px solid rgb(251 113 133 / 28%);
+  border-radius: var(--radius-md);
+  color: var(--status-error);
+  font: font.$text-md-regular;
+  line-height: 1.5;
+  margin-top: space.$s2;
+}
+
+.errorBox strong {
+  font-weight: 600;
+}
+
+.skeletonRow td {
+  padding: space.$s4 space.$s6;
+  vertical-align: middle;
+}
+
+.skeletonIssueCell {
+  display: flex;
+  align-items: center;
+  gap: space.$s3;
+}
+
+.skeletonGrow {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: space.$s2;
+  min-width: 0;
 }

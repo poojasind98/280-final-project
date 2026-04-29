@@ -2,6 +2,27 @@
 @use "@styles/space";
 @use "@styles/breakpoint";
 @use "@styles/misc";
+@use "@styles/z-index";
+
+.skipLink {
+  position: absolute;
+  left: -9999px;
+  top: space.$s4;
+  z-index: z-index.$header + 10;
+  padding: space.$s2 space.$s4;
+  background: var(--accent-strong);
+  color: white;
+  font: font.$text-sm-semibold;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: var(--glow-accent);
+
+  &:focus {
+    left: space.$s4;
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+  }
+}
 
 .container {
   display: flex;

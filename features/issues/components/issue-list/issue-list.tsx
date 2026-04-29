@@ -3,9 +3,67 @@ import { useRouter } from "next/router";
 import { ProjectLanguage } from "@api/projects.types";
 import { useGetProjects } from "@features/projects";
 import { NLFilterBar, type ParsedFilter } from "@features/ai";
+import { SkeletonPulse } from "@features/ui";
 import { useGetIssues } from "../../api/use-get-issues";
 import { IssueRow } from "./issue-row";
 import styles from "./issue-list.module.scss";
+
+function IssueTableSkeleton() {
+  return (
+    <div
+      className={styles.container}
+      aria-busy="true"
+      aria-live="polite"
+      aria-label="Loading issues"
+    >
+      <table className={styles.table}>
+        <thead>
+          <tr className={styles.headerRow}>
+            <th className={styles.headerCell}>Issue</th>
+            <th className={styles.headerCell}>Level</th>
+            <th className={styles.headerCell}>Events</th>
+            <th className={styles.headerCell}>Users</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from({ length: 8 }).map((_, i) => (
+            <tr key={i} className={styles.skeletonRow}>
+              <td>
+                <div className={styles.skeletonIssueCell}>
+                  <SkeletonPulse
+                    width="2.25rem"
+                    height="2.25rem"
+                    rounded="md"
+                  />
+                  <div className={styles.skeletonGrow}>
+                    <SkeletonPulse height="0.875rem" width="72%" rounded="sm" />
+                    <SkeletonPulse height="0.75rem" width="48%" rounded="sm" />
+                  </div>
+                </div>
+              </td>
+              <td>
+                <SkeletonPulse height="1.5rem" width="4.5rem" rounded="full" />
+              </td>
+              <td>
+                <SkeletonPulse height="1rem" width="2.5rem" rounded="sm" />
+              </td>
+              <td>
+                <SkeletonPulse height="1rem" width="2.5rem" rounded="sm" />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className={styles.paginationContainer}>
+        <div className={styles.skeletonPaginationInner}>
+          <SkeletonPulse height="38px" width="88px" rounded="sm" />
+          <SkeletonPulse height="38px" width="88px" rounded="sm" />
+        </div>
+        <SkeletonPulse height="1.25rem" width="10rem" rounded="sm" />
+      </div>
+    </div>
+  );
+}
 
 export function IssueList() {
   const router = useRouter();
@@ -55,17 +113,33 @@ export function IssueList() {
   }, [issuesPage.data, filter, projectIdToLanguage]);
 
   if (projects.isLoading || issuesPage.isLoading) {
-    return <div>Loading</div>;
+    return (
+      <>
+        <NLFilterBar value={filter} onChange={setFilter} />
+        <IssueTableSkeleton />
+      </>
+    );
   }
 
   if (projects.isError) {
     console.error(projects.error);
-    return <div>Error loading projects: {projects.error.message}</div>;
+    return (
+      <div className={styles.errorBox} role="alert">
+        <strong>Couldn’t load projects.</strong> {projects.error.message}
+      </div>
+    );
   }
 
   if (issuesPage.isError) {
     console.error(issuesPage.error);
-    return <div>Error loading issues: {issuesPage.error.message}</div>;
+    return (
+      <>
+        <NLFilterBar value={filter} onChange={setFilter} />
+        <div className={styles.errorBox} role="alert">
+          <strong>Couldn’t load issues.</strong> {issuesPage.error.message}
+        </div>
+      </>
+    );
   }
 
   const { meta } = issuesPage.data || {};
